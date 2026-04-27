@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q.Bllom（キュー・ブルーム）| 量子痩身エステ・體整 富山市大島</title>
+<meta name="description" content="押さない。痛くない。それなのに、身体が整う。富山市大島の量子痩身エステ・體整サロン Q.Bllom（キュー・ブルーム）。2026年5月8日オープン。初回体験2,000円。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #3D1F1F;
+  --primary-dark: #2A1010;
+  --accent: #E8C4B8;
+  --accent-dark: #C9967F;
+  --gold: #C9A96E;
+  --gold-light: #E8D5A3;
+  --bg: #FAF6F0;
+  --bg-section: #F5EDE3;
+  --white: #FFFFFF;
+  --text: #3D1F1F;
+  --text-muted: #6B4A4A;
+  --border: rgba(201,169,110,0.25);
+  --shadow: 0 4px 24px rgba(61,31,31,0.08);
+  --radius: 12px;
+  --radius-sm: 6px;
+  --radius-pill: 50px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  line-height: 2;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+h1, h2, h3 {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { text-decoration: none; color: inherit; }
+
+.section-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: 80px 0; }
+
+/* スクロールプログレスバー */
+.scroll-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; background: var(--gold);
+  z-index: 1000; width: 0%;
+  transition: width 0.1s;
+}
+
+/* ゴールドライン */
+.gold-line {
+  width: 50px; height: 1px;
+  background: var(--gold);
+  margin: 16px auto;
+}
+.gold-line.left { margin: 12px 0; }
+
+/* セクションタイトル */
+.sec-title {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.sec-title .en {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 8px;
+}
+.sec-title h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--primary);
+  display: inline-block;
+  position: relative;
+  padding: 0.25em 0;
+  background: none;
+  letter-spacing: 0.12em;
+}
+.sec-title h2::before { display: none; }
+.sec-title h2::after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(to right, #C9A96E, #E8D5A3);
+}
+
+/* about・manager の左寄せh2にも同スタイル適用 */
+.about-text h2,
+.manager-text h2 {
+  display: inline-block;
+  position: relative;
+  padding: 0.25em 0;
+  background: none;
+  letter-spacing: 0.1em;
+}
+.about-text h2::after,
+.manager-text h2::after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(to right, #C9A96E, #E8D5A3);
+}
+
+/* ornament-line 完全非表示 */
+.ornament-line { display: none !important; }
+
+/* フェードイン */
+.fi {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fi.visible { opacity: 1; transform: translateY(0); }
+.fi.d1 { transition-delay: 0.1s; }
+.fi.d2 { transition-delay: 0.2s; }
+.fi.d3 { transition-delay: 0.3s; }
+.fi.d4 { transition-delay: 0.4s; }
+
+/* ========== HEADER ========== */
+#header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+#header.scrolled {
+  background: rgba(250,246,240,0.95);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px rgba(61,31,31,0.08);
+}
+.header-logo {
+  display: flex; align-items: center;
+}
+.header-logo-img {
+  height: 44px;
+  width: auto;
+  mix-blend-mode: screen;
+  transition: opacity 0.3s;
+}
+.header-logo-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.1rem;
+  color: var(--primary);
+  letter-spacing: 0.15em;
+  display: none;
+}
+#header.scrolled .header-logo-img { display: none; }
+#header.scrolled .header-logo-text { display: block; }
+.header-cta {
+  background: var(--accent);
+  color: var(--primary);
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.2s;
+}
+.header-cta:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+/* ========== HERO (FV画像切替) ========== */
+#hero {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+}
+.hero-fv-img {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+.hero-fv-pc { display: block; }
+.hero-fv-sp { display: none; }
+
+/* LINEボタン オーバーレイ */
+.hero-cta-overlay {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+  white-space: nowrap;
+}
+.btn-line {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #06C755;
+  color: var(--white);
+  padding: 18px 48px;
+  border-radius: var(--radius-pill);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  box-shadow: 0 6px 24px rgba(6,199,85,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.btn-line:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(6,199,85,0.55);
+}
+.btn-line svg { width: 24px; height: 24px; fill: white; flex-shrink: 0; }
+
+/* スクロール矢印 */
+.hero-scroll {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  font-family: 'Noto Sans JP', sans-serif;
+  z-index: 10;
+  line-height: 1;
+  animation: bounce 2s ease-in-out infinite;
+}
+.hero-scroll::after {
+  content: '';
+  width: 1px; height: 32px;
+  background: rgba(201,169,110,0.6);
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* SP切替 */
+@media (max-width: 768px) {
+  .hero-fv-pc { display: none; }
+  .hero-fv-sp { display: block; }
+  .hero-cta-overlay { bottom: 4%; }
+  .btn-line { padding: 16px 36px; font-size: 0.95rem; }
+}
+
+/* ========== CAMPAIGN ========== */
+#campaign {
+  background: var(--primary);
+  padding: 64px 0;
+}
+.campaign-title {
+  text-align: center;
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 8px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.campaign-title-jp {
+  text-align: center;
+  color: var(--white);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  margin-bottom: 8px;
+}
+.campaign-note {
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+  margin-bottom: 40px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+}
+.campaign-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.campaign-card {
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+.campaign-num {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--primary);
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.campaign-label {
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 12px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.campaign-value {
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  color: var(--accent);
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.campaign-desc {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+  margin-bottom: 12px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.campaign-period {
+  display: inline-block;
+  border: 1px solid rgba(201,169,110,0.4);
+  color: var(--gold);
+  font-size: 0.72rem;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.campaign-footer {
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  margin-top: 28px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ========== POINTS ========== */
+#points {
+  background: var(--bg);
+}
+.points-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.point-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 36px 24px 28px;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.point-img-wrap {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+  margin: -36px -24px 20px;
+  width: calc(100% + 48px);
+  position: relative;
+}
+.point-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.point-card:hover .point-img-wrap img {
+  transform: scale(1.04);
+}
+.point-img-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(61,31,31,0.12) 100%);
+}
+.point-num {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.point-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.point-title {
+  font-size: 1.15rem;
+  color: var(--primary);
+  line-height: 1.4;
+}
+.point-body {
+  font-size: 0.97rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 2;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ========== ABOUT ========== */
+#about {
+  background: var(--bg-section);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.about-img {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  width: 100%;
+}
+.about-text .en {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.about-text h2 {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.about-text p {
+  font-size: 1rem;
+  line-height: 2.1;
+  color: #4A2A2A;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+}
+.about-concept {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--white);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.about-concept p {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+/* ========== SERVICES ========== */
+#services {
+  background: var(--bg);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.service-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.service-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+.service-body {
+  padding: 28px 24px;
+}
+.service-label {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.service-title {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+.service-desc {
+  font-size: 1rem;
+  color: #4A2A2A;
+  line-height: 2;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+}
+.service-tag {
+  display: inline-block;
+  background: var(--bg-section);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  margin-top: 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+/* ========== MENU ========== */
+#menu {
+  background: var(--bg-section);
+}
+.menu-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+}
+.menu-img-wrap {
+  position: sticky;
+  top: 100px;
+}
+.menu-img-wrap img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  aspect-ratio: 3/4;
+}
+.menu-img-caption {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.1em;
+}
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.menu-table thead tr {
+  border-bottom: 1px solid var(--gold);
+}
+.menu-table thead th {
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  text-align: left;
+}
+.menu-table thead th:last-child { text-align: right; }
+.menu-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.menu-table tbody tr:hover { background: rgba(255,255,255,0.6); }
+.menu-table tbody td {
+  padding: 20px 16px;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+.menu-table tbody td:last-child {
+  text-align: right;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--primary);
+  white-space: nowrap;
+}
+.menu-name { font-size: 1.05rem; color: var(--primary); }
+.menu-time {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-top: 3px;
+}
+.menu-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--primary);
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-left: 8px;
+  font-family: 'Noto Sans JP', sans-serif;
+  vertical-align: middle;
+}
+.menu-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 24px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+@media (max-width: 768px) {
+  .menu-layout { grid-template-columns: 1fr; }
+  .menu-img-wrap { position: static; }
+  .menu-img-wrap img { aspect-ratio: 16/9; }
+}
+
+/* ========== MANAGER ========== */
+#manager {
+  background: var(--bg);
+}
+.manager-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.manager-avatar {
+  text-align: center;
+}
+.manager-avatar img {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  object-fit: cover;
+  margin: 0 auto 12px;
+}
+.manager-name {
+  font-size: 0.85rem;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+}
+.manager-en-name {
+  font-size: 1rem;
+  color: var(--gold);
+  font-family: 'Shippori Mincho', serif;
+  letter-spacing: 0.25em;
+  margin-top: 4px;
+}
+.manager-role {
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-top: 4px;
+}
+.manager-text .en {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.manager-text h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.manager-text p {
+  font-size: 1rem;
+  line-height: 2.1;
+  color: #4A2A2A;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+.manager-closing {
+  font-size: 0.88rem;
+  color: var(--primary);
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+/* ========== FAQ ========== */
+#faq {
+  background: var(--bg-section);
+}
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 24px 0;
+}
+.faq-q {
+  display: flex; align-items: flex-start; gap: 14px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+.faq-q-mark {
+  width: 28px; height: 28px;
+  background: var(--accent);
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-top: 2px;
+}
+.faq-a {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-top: 16px;
+  font-size: 1rem;
+  color: #4A2A2A;
+  line-height: 2;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+}
+.faq-a-mark {
+  width: 28px; height: 28px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-top: 2px;
+}
+
+/* ========== RESERVATION ========== */
+#reservation {
+  background: var(--primary);
+  text-align: center;
+  padding: 80px 0;
+}
+#reservation .en {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+#reservation h2 {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--white);
+  margin-bottom: 12px;
+}
+#reservation p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 36px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  line-height: 1.8;
+}
+.btn-line-lg {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #06C755;
+  color: var(--white);
+  padding: 20px 52px;
+  border-radius: var(--radius-pill);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  box-shadow: 0 6px 24px rgba(6,199,85,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 32px;
+}
+.btn-line-lg:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(6,199,85,0.5);
+}
+.btn-line-lg svg { width: 26px; height: 26px; fill: white; }
+.reservation-tel {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+}
+.reservation-tel a {
+  color: var(--gold);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+}
+
+/* ========== ACCESS ========== */
+#access {
+  background: var(--bg);
+}
+.access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.access-info { }
+.access-name {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.access-name-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-bottom: 24px;
+}
+.access-list { list-style: none; }
+.access-list li {
+  display: flex; gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.access-list .label {
+  color: var(--gold);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+  padding-top: 2px;
+  min-width: 56px;
+}
+.access-list .value { color: var(--primary); line-height: 1.7; }
+.access-exterior {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.access-exterior img {
+  width: 100%; height: 220px; object-fit: cover;
+}
+.access-map {
+  margin-top: 16px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.access-map iframe {
+  width: 100%; height: 220px; display: block; border: none;
+}
+
+/* ========== FOOTER ========== */
+#footer {
+  background: var(--primary-dark);
+  padding: 48px 24px 32px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.3rem;
+  color: var(--white);
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+}
+.footer-sub {
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  font-family: 'Noto Sans JP', sans-serif;
+  margin-bottom: 24px;
+}
+.footer-nav {
+  display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.footer-nav a {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+  font-family: 'Noto Sans JP', sans-serif;
+  transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--gold); }
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.1em;
+}
+
+/* ========== GOLD DECORATIONS ========== */
+
+/* シマーアニメーション */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1);    opacity: 0.25; }
+  50%       { transform: scale(1.06); opacity: 0.55; }
+}
+@keyframes float-petal {
+  0%, 100% { transform: translateY(0)   rotate(0deg);  opacity: 0.5; }
+  50%       { transform: translateY(-12px) rotate(8deg); opacity: 0.9; }
+}
+
+/* ゴールドシマーテキスト */
+.gold-shimmer {
+  background: linear-gradient(90deg, #C9A96E 0%, #F0D98A 35%, #C9A96E 55%, #E8D5A3 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ヒーロー 金の光輪 */
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.3);
+  pointer-events: none;
+  animation: pulse-ring 5s ease-in-out infinite;
+}
+.hero-ring-1 { width: 420px; height: 420px; animation-delay: 0s; }
+.hero-ring-2 { width: 640px; height: 640px; animation-delay: 1.5s; }
+.hero-ring-3 { width: 860px; height: 860px; animation-delay: 3s; }
+
+/* セクションタイトル 装飾強化 */
+.sec-title h2 {
+  position: relative;
+  display: inline-block;
+}
+.ornament-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px auto 0;
+}
+.ornament-line span {
+  display: block;
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+.ornament-line span:last-child {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+.ornament-diamond {
+  width: 7px; height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  display: block;
+  flex-shrink: 0;
+}
+.ornament-dot {
+  width: 3px; height: 3px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* セクション区切り飾り */
+.sec-divider {
+  text-align: center;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  overflow: hidden;
+}
+.sec-divider-line {
+  flex: 1;
+  max-width: 120px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,169,110,0.4));
+}
+.sec-divider-line.rev {
+  background: linear-gradient(to left, transparent, rgba(201,169,110,0.4));
+}
+.sec-divider-svg {
+  color: var(--gold);
+  font-size: 0;
+  line-height: 0;
+}
+
+/* ゴールドドットパターン背景 */
+#points,
+#services,
+#access {
+  background-image: radial-gradient(circle, rgba(201,169,110,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ポイントカード ゴールドアクセント強化 */
+.point-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(201,169,110,0.35) !important;
+  box-shadow: 0 4px 28px rgba(201,169,110,0.12), 0 2px 8px rgba(61,31,31,0.06) !important;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.point-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+}
+.point-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(201,169,110,0.22), 0 4px 12px rgba(61,31,31,0.08) !important;
+}
+
+/* サービスカード ゴールドアクセント */
+.service-card {
+  position: relative;
+  border: 1px solid rgba(201,169,110,0.35) !important;
+  box-shadow: 0 4px 28px rgba(201,169,110,0.12) !important;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  z-index: 1;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(201,169,110,0.22) !important;
+}
+
+/* キャンペーンカード ゴールドグロー */
+.campaign-card {
+  background: linear-gradient(145deg, rgba(201,169,110,0.1) 0%, rgba(232,196,184,0.06) 60%, transparent 100%);
+  border: 1px solid rgba(201,169,110,0.45) !important;
+  box-shadow: 0 0 0 1px rgba(201,169,110,0.15), inset 0 1px 0 rgba(201,169,110,0.2);
+}
+
+/* About コンセプトボックス 金枠 */
+.about-concept {
+  position: relative;
+  border-left: none !important;
+  border: 1px solid rgba(201,169,110,0.4) !important;
+  border-radius: var(--radius) !important;
+  padding: 24px 28px !important;
+  background: linear-gradient(135deg, rgba(250,246,240,1) 0%, rgba(245,237,227,1) 100%) !important;
+}
+.about-concept::before,
+.about-concept::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: var(--gold);
+}
+.about-concept::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; border-radius: 3px 0 0 0; }
+.about-concept::after  { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; border-radius: 0 0 3px 0; }
+.about-concept p {
+  font-size: 1rem !important;
+  line-height: 1.9 !important;
+}
+
+/* 料金表 ゴールドアクセント強化 */
+.menu-table tbody td:last-child {
+  color: var(--gold) !important;
+}
+
+/* FAQアイテム ゴールドライン */
+.faq-item {
+  position: relative;
+  border-bottom: 1px solid rgba(201,169,110,0.2) !important;
+}
+
+/* 予約セクション ゴールド装飾 */
+#reservation {
+  background: linear-gradient(160deg, #3D1F1F 0%, #2A1010 50%, #1A0808 100%);
+  position: relative;
+  overflow: hidden;
+}
+#reservation::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(201,169,110,0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+/* フッター ゴールドライン */
+#footer::before {
+  content: '';
+  display: block;
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 32px;
+}
+
+/* メニュー画像キャプション装飾 */
+.menu-img-caption {
+  position: relative;
+  padding-top: 14px !important;
+}
+.menu-img-caption::before {
+  content: '';
+  display: block;
+  width: 30px; height: 1px;
+  background: var(--gold);
+  margin: 0 auto 8px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  section { padding: 56px 0; }
+
+  .campaign-grid { grid-template-columns: 1fr; }
+  .points-grid { grid-template-columns: 1fr; gap: 16px; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .manager-grid { grid-template-columns: 1fr; }
+  .manager-avatar { display: flex; align-items: center; gap: 20px; text-align: left; }
+  .manager-avatar img { width: 100px; height: 100px; }
+  .access-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  #header { padding: 14px 20px; }
+  .header-cta { padding: 8px 18px; font-size: 0.75rem; }
+
+  .menu-table thead { display: none; }
+  .menu-table tbody td { display: block; padding: 8px 16px; }
+  .menu-table tbody td:last-child { text-align: left; padding-top: 0; }
+  .menu-table tbody tr { padding: 16px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- スクロールバー -->
+<div class="scroll-bar" id="scrollBar"></div>
+
+<!-- ヘッダー -->
+<header id="header">
+  <div class="header-logo">
+    <img src="img/img_logo.png.png" alt="Q.Bllom" class="header-logo-img">
+    <span class="header-logo-text">Q.Bllom</span>
+  </div>
+  <a href="https://lin.ee/rVNrmrl" class="header-cta" target="_blank">ご予約はこちら</a>
+</header>
+
+<!-- Hero (FV) -->
+<section id="hero">
+  <img src="img/img_fv_pc.jpg.png" alt="Q.Bllom 量子痩身エステ・體整" class="hero-fv-img hero-fv-pc">
+  <img src="img/img_fv_sp.jpg.png" alt="Q.Bllom 量子痩身エステ・體整" class="hero-fv-img hero-fv-sp">
+  <div class="hero-cta-overlay fi">
+    <a href="https://lin.ee/rVNrmrl" class="btn-line" target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;fill:currentColor;flex-shrink:0;"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      LINEでご予約
+    </a>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- 区切り -->
+<div class="sec-divider" style="background:var(--primary);padding:20px 0;">
+  <div class="sec-divider-line rev"></div>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="sec-divider-svg"><path d="M12 2 L14.5 9.5 L22 12 L14.5 14.5 L12 22 L9.5 14.5 L2 12 L9.5 9.5 Z" fill="#C9A96E" opacity="0.8"/></svg>
+  <div class="sec-divider-line"></div>
+</div>
+
+<!-- キャンペーン -->
+<section id="campaign">
+  <div class="section-inner">
+    <p class="campaign-title fi">OPEN CAMPAIGN</p>
+    <h2 class="campaign-title-jp fi d1">オープン記念キャンペーン</h2>
+    <p class="campaign-note fi d1">オープンを記念してお得な特典をご用意しました。この機会にぜひご体験ください</p>
+    <div class="campaign-grid">
+      <div class="campaign-card fi d2">
+        <div class="campaign-num">1</div>
+        <p class="campaign-label">オープン記念特典</p>
+        <div class="campaign-value">50<span style="font-size:0.5em">%</span>OFF</div>
+        <p class="campaign-desc">全メニュー 初回限定</p>
+        <span class="campaign-period">期間限定：2026年5月31日まで</span>
+      </div>
+      <div class="campaign-card fi d3">
+        <div class="campaign-num">2</div>
+        <p class="campaign-label">チラシご持参特典</p>
+        <div class="campaign-value">¥1,000<span style="font-size:0.4em">割引</span></div>
+        <p class="campaign-desc">チラシをご持参でのご予約</p>
+        <span class="campaign-period">期間限定：2026年6月30日まで</span>
+      </div>
+    </div>
+    <p class="campaign-footer fi">※特典①②いずれかをお選びいただけます</p>
+  </div>
+</section>
+
+<!-- 3つのポイント -->
+<section id="points">
+  <div class="section-inner">
+    <div class="sec-title fi">
+      <span class="en">FEATURES</span>
+      <h2>Q.Bllomが選ばれる理由</h2>
+      <div class="ornament-line">
+        <span></span>
+        <span class="ornament-dot"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-dot"></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="points-grid">
+      <div class="point-card fi d1">
+        <div class="point-img-wrap">
+          <img src="img/img_point01.jpg.png" alt="身体に負担をかけず整える">
+        </div>
+        <p class="point-num">POINT 01</p>
+        <p class="point-sub">身体に負担をかけず</p>
+        <h3 class="point-title">整える</h3>
+        <p class="point-body">年齢や体型に合わせた、がんばらせない施術。初回体験から身体の変化や軽さを感じていただけます。</p>
+      </div>
+      <div class="point-card fi d2">
+        <div class="point-img-wrap">
+          <img src="img/img_point02.jpg.png" alt="痛みのない施術">
+        </div>
+        <p class="point-num">POINT 02</p>
+        <p class="point-sub">安心できる</p>
+        <h3 class="point-title">痛みのない施術</h3>
+        <p class="point-body">強く押す・揉む施術ではありません。氣の流れとエネルギーの巡りを整えることで、やさしく身体の内側から変化を促します。</p>
+      </div>
+      <div class="point-card fi d3">
+        <div class="point-img-wrap">
+          <img src="img/img_point03.jpg.png" alt="確かな技術">
+        </div>
+        <p class="point-num">POINT 03</p>
+        <p class="point-sub">満足できる</p>
+        <h3 class="point-title">確かな技術</h3>
+        <p class="point-body">洋服のままでOK。氣功と量子エネルギーを用いた独自の施術で、「楽になりたい」「軽くなりたい」という声に応えます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Q.Bllomとは -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="fi">
+        <img src="img/img_body03.jpg.png" alt="Q.Bllomの施術イメージ" class="about-img">
+      </div>
+      <div class="about-text fi d2">
+        <span class="en">ABOUT</span>
+        <div class="gold-line left"></div>
+        <h2>Q.Bllomとは</h2>
+        <p>富山の立山連峰を望む場所に新たにオープンする、量子痩身エステ・體整サロンです。</p>
+        <p>年齢を重ねるにつれ、「がんばる」より「整える」ことが大切だと感じています。自然に囲まれたこの場所で、心と身体がほっと緩む時間をお届けします。</p>
+        <div class="about-concept">
+          <p>「目に見えない量子の力と氣の力で<br>あなた本来の輝きが花ひらく」</p>
+        </div>
+        <p style="margin-top:16px; font-size:0.8rem; color:var(--text-muted);">
+          Q（Quantum・量子）＝ 身体やエネルギーの一番小さなところに働きかける力<br>
+          Bloom（ブルーム）＝ 内側から、自然に、その人本来の輝きが開いていくこと
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- サービス -->
+<section id="services">
+  <div class="section-inner">
+    <div class="sec-title fi">
+      <span class="en">SERVICE</span>
+      <h2>施術メニュー</h2>
+      <div class="ornament-line">
+        <span></span>
+        <span class="ornament-dot"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-dot"></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fi d1">
+        <img src="img/img_body01.jpg.png" alt="ボディケア" class="service-img">
+        <div class="service-body">
+          <p class="service-label">BODY CARE</p>
+          <h3 class="service-title">ボディケア・體整</h3>
+          <p class="service-desc">全身を瞬間で整えるボディケア。氣による革新的な痩身エステで、強く押す・流すといった施術とは全く異なるアプローチで身体の内側から変化を促します。</p>
+          <span class="service-tag">洋服のままOK</span>
+          <span class="service-tag">痛みなし</span>
+        </div>
+      </div>
+      <div class="service-card fi d2">
+        <img src="img/img_facial02.jpg.png" alt="フェイシャルケア" class="service-img">
+        <div class="service-body">
+          <p class="service-label">FACIAL CARE</p>
+          <h3 class="service-title">フェイシャルケア</h3>
+          <p class="service-desc">お肌の健康を取り戻す、独自のフェイシャルケアメニュー。氣功と量子エネルギーで、自然な軽さと巡りを引き出すやさしいケアをご提供します。</p>
+          <span class="service-tag">初回体験あり</span>
+          <span class="service-tag">60分〜</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 料金表 -->
+<section id="menu">
+  <div class="section-inner">
+    <div class="sec-title fi">
+      <span class="en">MENU & PRICE</span>
+      <h2>料金表</h2>
+      <div class="ornament-line">
+        <span></span>
+        <span class="ornament-dot"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-dot"></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="menu-layout">
+      <div class="fi">
+        <table class="menu-table">
+          <thead>
+            <tr>
+              <th>メニュー</th>
+              <th>時間</th>
+              <th>料金</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="menu-name">瞬間身体調整<span class="menu-badge">体験価格</span></div>
+                <div class="menu-time">初めての方におすすめ</div>
+              </td>
+              <td><span class="menu-time">20分</span></td>
+              <td>¥2,000</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="menu-name">身体調整・フェイシャルケア</div>
+                <div class="menu-time">ボディ＋フェイシャルのセット</div>
+              </td>
+              <td><span class="menu-time">60分</span></td>
+              <td>¥6,000</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="menu-name">瞬間全身調整</div>
+                <div class="menu-time">全身をすっきり整える</div>
+              </td>
+              <td><span class="menu-time">40分</span></td>
+              <td>¥6,600</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="menu-name">全身痩身フェイシャルケア</div>
+                <div class="menu-time">痩身＋フェイシャルの本格コース</div>
+              </td>
+              <td><span class="menu-time">60分</span></td>
+              <td>¥13,000</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="menu-name">瞬間全身調整・全身痩身フェイシャルケア</div>
+                <div class="menu-time">すべてのケアを組み合わせた最上級コース</div>
+              </td>
+              <td><span class="menu-time">90分</span></td>
+              <td>¥18,000</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="menu-note">※すべて予約制です。LINEまたはお電話にてご予約ください</p>
+      </div>
+      <div class="menu-img-wrap fi d2">
+        <img src="img/img_facial01.jpg.png" alt="施術イメージ">
+        <p class="menu-img-caption">やさしく、丁寧に。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 店長紹介 -->
+<section id="manager">
+  <div class="section-inner">
+    <div class="manager-grid">
+      <div class="manager-avatar fi">
+        <img src="img/img_manager.png.png" alt="店長イラスト">
+        <div>
+          <p class="manager-name">Q.Bllom 店長</p>
+          <p class="manager-en-name">YUKARI</p>
+          <p class="manager-role">量子痩身エステ・體整</p>
+        </div>
+      </div>
+      <div class="manager-text fi d2">
+        <span class="en">MESSAGE</span>
+        <div class="gold-line left"></div>
+        <h2>店長からのメッセージ</h2>
+        <p>このたび、富山の立山連峰を望む場所に新たに『Q Bloom（キュー・ブルーム）』をオープンいたします。</p>
+        <p>年齢を重ねるにつれ、「がんばる」より「整える」ことが大切だと感じています。自然に囲まれたこの場所で、心と身体がほっと緩む時間をお届けできれば嬉しいです。</p>
+        <p>「何がわからないかも分からない」そんな方も大丈夫です。初回はお身体の状態をしっかりお聞きしながら、あなただけのケアをご提案します。</p>
+        <p class="manager-closing">みなさまのご来店を、心よりお待ちしております。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="sec-title fi">
+      <span class="en">FAQ</span>
+      <h2>よくある質問</h2>
+      <div class="ornament-line">
+        <span></span>
+        <span class="ornament-dot"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-dot"></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fi">
+        <div class="faq-q">
+          <span class="faq-q-mark">Q</span>
+          <span>初めてでも大丈夫ですか？</span>
+        </div>
+        <div class="faq-a">
+          <span class="faq-a-mark">A</span>
+          <span>はい、大歓迎です。初回は20分・2,000円の体験メニューからお試しいただけます。お身体の状態をしっかりお聞きしてから施術を行いますので、安心してお越しください。</span>
+        </div>
+      </div>
+      <div class="faq-item fi">
+        <div class="faq-q">
+          <span class="faq-q-mark">Q</span>
+          <span>着替えは必要ですか？</span>
+        </div>
+        <div class="faq-a">
+          <span class="faq-a-mark">A</span>
+          <span>洋服のままで施術を受けていただけます。お仕事帰りや買い物の途中でもお気軽にお越しください。</span>
+        </div>
+      </div>
+      <div class="faq-item fi">
+        <div class="faq-q">
+          <span class="faq-q-mark">Q</span>
+          <span>痛みはありますか？</span>
+        </div>
+        <div class="faq-a">
+          <span class="faq-a-mark">A</span>
+          <span>痛みはありません。強く押す・揉むといった施術ではなく、氣功と量子エネルギーを用いたやさしいアプローチです。施術後に身体の軽さや変化を感じていただけます。</span>
+        </div>
+      </div>
+      <div class="faq-item fi">
+        <div class="faq-q">
+          <span class="faq-q-mark">Q</span>
+          <span>予約はどうすればよいですか？</span>
+        </div>
+        <div class="faq-a">
+          <span class="faq-a-mark">A</span>
+          <span>LINEまたはお電話（080-1953-8956）にてご予約いただけます。完全予約制ですので、事前にご連絡をお願いします。</span>
+        </div>
+      </div>
+      <div class="faq-item fi">
+        <div class="faq-q">
+          <span class="faq-q-mark">Q</span>
+          <span>どんな方に向いていますか？</span>
+        </div>
+        <div class="faq-a">
+          <span class="faq-a-mark">A</span>
+          <span>「痩せたい」「楽になりたい」「身体を軽くしたい」とお考えの女性に特におすすめです。年齢や体型を問わず、身体に負担をかけずに整えたい方に向いています。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ご予約 -->
+<section id="reservation">
+  <div class="section-inner">
+    <p class="en fi">RESERVATION</p>
+    <h2 class="fi d1">ご予約はこちら</h2>
+    <p class="fi d2">完全予約制です。<br>LINEからお気軽にご連絡ください。</p>
+    <a href="https://lin.ee/rVNrmrl" class="btn-line-lg fi d3" target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      LINEでご予約・お問い合わせ
+    </a>
+    <p class="reservation-tel fi d4">
+      お電話でのご予約：<a href="tel:08019538956">080-1953-8956</a>
+    </p>
+  </div>
+</section>
+
+<!-- アクセス -->
+<section id="access">
+  <div class="section-inner">
+    <div class="sec-title fi">
+      <span class="en">ACCESS</span>
+      <h2>店舗情報・アクセス</h2>
+      <div class="ornament-line">
+        <span></span>
+        <span class="ornament-dot"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-dot"></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="access-grid">
+      <div class="fi">
+        <h3 class="access-name">Q.Bllom</h3>
+        <p class="access-name-sub">キュー・ブルーム｜量子痩身エステ・體整</p>
+        <ul class="access-list">
+          <li>
+            <span class="label">住所</span>
+            <span class="value">〒939-8025<br>富山県富山市大島1丁目135<br>（中華そば 大喜 大島店敷地内）</span>
+          </li>
+          <li>
+            <span class="label">電話</span>
+            <span class="value"><a href="tel:08019538956" style="color:var(--primary)">080-1953-8956</a></span>
+          </li>
+          <li>
+            <span class="label">営業</span>
+            <span class="value">13:00〜20:00（予約制）</span>
+          </li>
+          <li>
+            <span class="label">定休日</span>
+            <span class="value">水曜・木曜</span>
+          </li>
+          <li>
+            <span class="label">予約</span>
+            <span class="value">LINEまたはお電話にて</span>
+          </li>
+        </ul>
+      </div>
+      <div class="fi d2">
+        <div class="access-exterior">
+          <img src="img/img_exterior.jpg.jpg" alt="Q.Bllom外観">
+        </div>
+        <div class="access-map">
+          <iframe
+            src="https://maps.google.com/maps?q=富山県富山市大島1丁目135&output=embed&hl=ja&z=16"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <a href="https://maps.app.goo.gl/HJYrFB5Goq8JX5C48" target="_blank" style="display:block; text-align:center; margin-top:10px; font-size:0.78rem; color:var(--gold); font-family:'Noto Sans JP',sans-serif; letter-spacing:0.1em;">
+          Google マップで開く →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer id="footer">
+  <img src="img/img_logo.png.png" alt="Q.Bllom" style="width:100px;height:100px;object-fit:contain;margin:0 auto 8px;mix-blend-mode:screen;">
+  <p class="footer-sub">量子痩身エステ・體整｜富山市大島</p>
+  <nav class="footer-nav">
+    <a href="#about">Q.Bllomとは</a>
+    <a href="#services">施術メニュー</a>
+    <a href="#menu">料金表</a>
+    <a href="#faq">よくある質問</a>
+    <a href="#reservation">ご予約</a>
+    <a href="#access">アクセス</a>
+  </nav>
+  <p class="footer-copy">© 2026 Q.Bllom All Rights Reserved.</p>
+</footer>
+
+<script>
+// スクロールバー
+const scrollBar = document.getElementById('scrollBar');
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  scrollBar.style.width = scrolled + '%';
+}, { passive: true });
+
+// ヘッダー
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// フェードイン
+const items = Array.from(document.querySelectorAll('.fi'));
+const show = el => el.classList.add('visible');
+if (!('IntersectionObserver' in window)) {
+  items.forEach(show);
+} else {
+  const io = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { show(entry.target); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.06 });
+  items.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.92) show(el);
+    else io.observe(el);
+  });
+}
+</script>
+</body>
+</html>
